@@ -9,11 +9,13 @@ class FancyBottomNavigation2 extends StatefulWidget {
     required this.onTabChangedListener,
     this.animDuration = 300,
     this.initialSelection = 0,
+    this.barBackgroundColor,
   }) : super(key: key);
 
   final double barheight;
   final List<TabData> tabs;
   final int animDuration;
+  final Color? barBackgroundColor;
   final Function(int position) onTabChangedListener;
   final int initialSelection;
 
@@ -28,6 +30,7 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
   int currentSelected = 0;
   double _circleAlignX = 0;
   double _circleIconAlpha = 1;
+  late Color barBackgroundColor;
 
   @override
   void initState() {
@@ -48,6 +51,17 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    activeIcon = widget.tabs[currentSelected].icon;
+
+    barBackgroundColor = widget.barBackgroundColor ??
+        ((Theme.of(context).brightness == Brightness.dark)
+            ? Colors.black54
+            : Colors.white);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
@@ -55,10 +69,14 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
       children: [
         Container(
             height: widget.barheight,
-            decoration: const BoxDecoration(boxShadow: [
-              BoxShadow(
-                  color: Colors.black12, offset: Offset(0, -1), blurRadius: 8)
-            ]),
+            decoration: BoxDecoration(
+                color: barBackgroundColor,
+                boxShadow: const [
+                  BoxShadow(
+                      color: Colors.black12,
+                      offset: Offset(0, -1),
+                      blurRadius: 8)
+                ]),
             child: Row(
               children: widget.tabs
                   .map((t) => TabItem(
