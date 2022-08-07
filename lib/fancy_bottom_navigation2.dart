@@ -31,3 +31,12 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
     );
   }
 }
+
+class TabData {
+  TabData({required this.iconData, required this.title, this.onclick});
+
+  IconData iconData;
+  String title;
+  Function? onclick;
+  final UniqueKey key = UniqueKey();
+}
