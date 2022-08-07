@@ -67,6 +67,10 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
       clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
       children: [
+        //
+        // Using this container to create the
+        //  background and text contemts
+        //
         Container(
             height: widget.barheight,
             decoration: BoxDecoration(
@@ -94,7 +98,14 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                       ))
                   .toList(),
             )),
-        Positioned(child: Container())
+
+        //
+        // Using this to create Icon Portion
+        //
+
+        Positioned(
+          child: Container(),
+        )
       ],
     );
   }

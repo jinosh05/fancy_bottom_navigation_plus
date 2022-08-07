@@ -34,18 +34,21 @@ class TabItem extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            AnimatedAlign(
-              alignment: Alignment(0, selected ? textOn : textOff),
-              duration: Duration(milliseconds: animDuration),
-              child: Padding(
-                padding: EdgeInsets.all(width * 0.02),
-                child: Text(
-                  title,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: titleStyle ??
-                      const TextStyle(
-                          fontWeight: FontWeight.w600, color: Colors.black),
+            Opacity(
+              opacity: selected ? 1 : 0,
+              child: AnimatedAlign(
+                alignment: Alignment(0, selected ? textOn : textOff),
+                duration: Duration(milliseconds: animDuration),
+                child: Padding(
+                  padding: EdgeInsets.all(width * 0.02),
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: titleStyle ??
+                        const TextStyle(
+                            fontWeight: FontWeight.w600, color: Colors.black),
+                  ),
                 ),
               ),
             ),
