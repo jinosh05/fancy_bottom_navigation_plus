@@ -30,39 +30,37 @@ class TabItem extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () => callbackFunction(uniqueKey),
-      child: Expanded(
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Opacity(
-              opacity: selected ? 1 : 0,
-              child: AnimatedAlign(
-                alignment: Alignment(0, selected ? textOn : textOff),
-                duration: Duration(milliseconds: animDuration),
-                child: Padding(
-                  padding: EdgeInsets.all(width * 0.02),
-                  child: Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: titleStyle ??
-                        const TextStyle(
-                            fontWeight: FontWeight.w600, color: Colors.black),
-                  ),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Opacity(
+            opacity: selected ? 1 : 0,
+            child: AnimatedAlign(
+              alignment: Alignment(0, selected ? textOn : textOff),
+              duration: Duration(milliseconds: animDuration),
+              child: Padding(
+                padding: EdgeInsets.all(width * 0.02),
+                child: Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: titleStyle ??
+                      const TextStyle(
+                          fontWeight: FontWeight.w600, color: Colors.black),
                 ),
               ),
             ),
-            AnimatedAlign(
-              alignment: Alignment(0, (selected) ? iconOff : iconOn),
+          ),
+          AnimatedAlign(
+            alignment: Alignment(0, (selected) ? iconOff : iconOn),
+            duration: Duration(milliseconds: animDuration),
+            child: AnimatedOpacity(
+              opacity: selected ? 1 : 0,
               duration: Duration(milliseconds: animDuration),
-              child: AnimatedOpacity(
-                opacity: selected ? 1 : 0,
-                duration: Duration(milliseconds: animDuration),
-                child: icon,
-              ),
-            )
-          ],
-        ),
+              child: icon,
+            ),
+          )
+        ],
       ),
     );
   }

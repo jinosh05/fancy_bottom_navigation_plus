@@ -153,7 +153,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         // Using this to create Icon Portion
         //
 
-        Positioned(
+        Positioned.fill(
           child: AnimatedAlign(
             duration: Duration(milliseconds: widget.animDuration),
             curve: Curves.easeOut,
