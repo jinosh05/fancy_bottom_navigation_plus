@@ -11,14 +11,15 @@ class FancyBottomNavigation2 extends StatefulWidget {
     this.animDuration = 300,
     this.initialSelection = 0,
     this.barBackgroundColor,
-    this.circleSize = 60,
+    this.circleRadius = 60,
     this.shadowRadius = 10,
+    this.circleColor,
   }) : super(key: key);
 
-  final double barheight, circleSize, shadowRadius;
+  final double barheight, circleRadius, shadowRadius;
   final List<TabData> tabs;
   final int animDuration;
-  final Color? barBackgroundColor;
+  final Color? barBackgroundColor, circleColor;
   final Function(int position) onTabChangedListener;
   final int initialSelection;
 
@@ -29,11 +30,14 @@ class FancyBottomNavigation2 extends StatefulWidget {
 class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
   Widget nextIcon = const Icon(Icons.home);
   Widget activeIcon = const Icon(Icons.home);
+  late Color circleColor;
+  late Color barBackgroundColor;
 
   int currentSelected = 0;
   double _circleAlignX = 0;
+
+  //  Opacity of the Icon
   double _circleIconAlpha = 1;
-  late Color barBackgroundColor;
 
   @override
   void initState() {
@@ -62,6 +66,11 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         ((Theme.of(context).brightness == Brightness.dark)
             ? Colors.black54
             : Colors.white);
+
+    circleColor = widget.circleColor ??
+        ((Theme.of(context).brightness == Brightness.dark)
+            ? Colors.white
+            : Theme.of(context).primaryColor);
   }
 
   @override
@@ -122,8 +131,8 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                   ClipRect(
                     clipper: HalfClipper(),
                     child: Container(
-                      width: widget.circleSize + widget.shadowRadius,
-                      height: widget.circleSize + widget.shadowRadius,
+                      width: widget.circleRadius + widget.shadowRadius,
+                      height: widget.circleRadius + widget.shadowRadius,
                       decoration: BoxDecoration(
                         color: widget.barBackgroundColor,
                         shape: BoxShape.circle,
@@ -136,6 +145,23 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                       ),
                     ),
                   ),
+
+                  //
+                  // Container to render the Icon
+                  //
+
+                  Container(
+                    width: widget.circleRadius,
+                    height: widget.circleRadius,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: circleColor),
+                    child: AnimatedOpacity(
+                      opacity: _circleIconAlpha,
+                      duration:
+                          Duration(microseconds: widget.animDuration ~/ 5),
+                      child: activeIcon,
+                    ),
+                  )
                 ]),
               ),
             ),
