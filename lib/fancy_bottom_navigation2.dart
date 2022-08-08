@@ -1,3 +1,4 @@
+import 'package:fancy_bottom_navigation_2/components/half_clipper.dart';
 import 'package:fancy_bottom_navigation_2/components/tab_item.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,11 @@ class FancyBottomNavigation2 extends StatefulWidget {
     this.animDuration = 300,
     this.initialSelection = 0,
     this.barBackgroundColor,
+    this.circleSize = 60,
+    this.shadowRadius = 10,
   }) : super(key: key);
 
-  final double barheight;
+  final double barheight, circleSize, shadowRadius;
   final List<TabData> tabs;
   final int animDuration;
   final Color? barBackgroundColor;
@@ -104,7 +107,39 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         //
 
         Positioned(
-          child: Container(),
+          child: AnimatedAlign(
+            duration: Duration(milliseconds: widget.animDuration),
+            curve: Curves.easeOut,
+            alignment: Alignment(_circleAlignX, 1),
+            child: FractionallySizedBox(
+              widthFactor: 1 / widget.tabs.length,
+              child: InkWell(
+                onTap: widget.tabs[currentSelected].onclick as void Function()?,
+                child: Stack(alignment: Alignment.center, children: [
+                  //
+                  //  Part of the Semicircle ARC with shadow
+                  //
+                  ClipRect(
+                    clipper: HalfClipper(),
+                    child: Container(
+                      width: widget.circleSize + widget.shadowRadius,
+                      height: widget.circleSize + widget.shadowRadius,
+                      decoration: BoxDecoration(
+                        color: widget.barBackgroundColor,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: widget.shadowRadius * 0.75,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
+            ),
+          ),
         )
       ],
     );
