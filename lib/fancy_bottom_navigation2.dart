@@ -1,4 +1,5 @@
 import 'package:fancy_bottom_navigation_2/components/half_clipper.dart';
+import 'package:fancy_bottom_navigation_2/components/half_painter.dart';
 import 'package:fancy_bottom_navigation_2/components/tab_item.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +37,9 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
   int currentSelected = 0;
   double _circleAlignX = 0;
 
+  //  Arc is used to create sonme outline
+  late double arcHeight, arcWidth;
+
   //  Opacity of the Icon
   double _circleIconAlpha = 1;
 
@@ -71,6 +75,9 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         ((Theme.of(context).brightness == Brightness.dark)
             ? Colors.white
             : Theme.of(context).primaryColor);
+
+    arcHeight = widget.circleRadius + widget.shadowRadius;
+    arcWidth = widget.circleRadius + (widget.shadowRadius * 3);
   }
 
   @override
@@ -142,6 +149,21 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                             blurRadius: widget.shadowRadius * 0.75,
                           )
                         ],
+                      ),
+                    ),
+                  ),
+
+                  //
+                  //  Custom Painting ARC to create Border
+                  //
+                  SizedBox(
+                    height: arcHeight,
+                    width: arcWidth,
+                    child: CustomPaint(
+                      painter: HalfPainter(
+                        barBackgroundColor,
+                        arcHeight,
+                        outline: widget.shadowRadius,
                       ),
                     ),
                   ),
