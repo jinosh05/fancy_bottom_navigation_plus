@@ -15,33 +15,54 @@ class FancyBottomNavigation2 extends StatefulWidget {
     this.circleRadius = 60,
     this.shadowRadius = 10,
     this.circleColor,
-  }) : super(key: key);
+    this.titleStyle,
+  })  : assert(tabs.length > 1 && tabs.length < 5),
+        super(key: key);
 
-  final double barheight, circleRadius, shadowRadius;
-  final List<TabData> tabs;
   final int animDuration;
   final Color? barBackgroundColor, circleColor;
-  final Function(int position) onTabChangedListener;
   final int initialSelection;
+  final Function(int position) onTabChangedListener;
+  final double barheight, circleRadius, shadowRadius;
+  final List<TabData> tabs;
+  final TextStyle? titleStyle;
 
   @override
   State<FancyBottomNavigation2> createState() => _FancyBottomNavigation2State();
 }
 
 class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
-  Widget nextIcon = const Icon(Icons.home);
   Widget activeIcon = const Icon(Icons.home);
-  late Color circleColor;
-  late Color barBackgroundColor;
-
-  int currentSelected = 0;
-  double _circleAlignX = 0;
-
+  Widget nextIcon = const Icon(Icons.home);
   //  Arc is used to create sonme outline
   late double arcHeight, arcWidth;
 
+  late Color barBackgroundColor;
+  late Color circleColor;
+  int currentSelected = 0;
+
+  double _circleAlignX = 0;
   //  Opacity of the Icon
   double _circleIconAlpha = 1;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    activeIcon = widget.tabs[currentSelected].icon;
+
+    barBackgroundColor = widget.barBackgroundColor ??
+        ((Theme.of(context).brightness == Brightness.dark)
+            ? Colors.black54
+            : Colors.white);
+
+    circleColor = widget.circleColor ??
+        ((Theme.of(context).brightness == Brightness.dark)
+            ? Colors.white
+            : Theme.of(context).primaryColor);
+
+    arcHeight = widget.circleRadius + widget.shadowRadius;
+    arcWidth = widget.circleRadius + (widget.shadowRadius * 3);
+  }
 
   @override
   void initState() {
@@ -61,23 +82,21 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
     }
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    activeIcon = widget.tabs[currentSelected].icon;
+  _initAnimationAndStart(double from, double to) {
+    _circleIconAlpha = 0;
 
-    barBackgroundColor = widget.barBackgroundColor ??
-        ((Theme.of(context).brightness == Brightness.dark)
-            ? Colors.black54
-            : Colors.white);
-
-    circleColor = widget.circleColor ??
-        ((Theme.of(context).brightness == Brightness.dark)
-            ? Colors.white
-            : Theme.of(context).primaryColor);
-
-    arcHeight = widget.circleRadius + widget.shadowRadius;
-    arcWidth = widget.circleRadius + (widget.shadowRadius * 3);
+    Future.delayed(Duration(milliseconds: widget.animDuration ~/ 5), () {
+      setState(() {
+        activeIcon = nextIcon;
+      });
+    }).then((_) {
+      Future.delayed(Duration(milliseconds: (widget.animDuration ~/ 5 * 3)),
+          () {
+        setState(() {
+          _circleIconAlpha = 1;
+        });
+      });
+    });
   }
 
   @override
@@ -107,6 +126,8 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                         title: t.title,
                         uniqueKey: t.key,
                         icon: t.icon,
+                        animDuration: widget.animDuration,
+                        titleStyle: widget.titleStyle,
                         callbackFunction: (uniqueKey) {
                           int selected = widget.tabs.indexWhere(
                               (tabData) => tabData.key == uniqueKey);
@@ -192,30 +213,13 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
       ],
     );
   }
-
-  _initAnimationAndStart(double from, double to) {
-    _circleIconAlpha = 0;
-
-    Future.delayed(Duration(milliseconds: widget.animDuration ~/ 5), () {
-      setState(() {
-        activeIcon = nextIcon;
-      });
-    }).then((_) {
-      Future.delayed(Duration(milliseconds: (widget.animDuration ~/ 5 * 3)),
-          () {
-        setState(() {
-          _circleIconAlpha = 1;
-        });
-      });
-    });
-  }
 }
 
 class TabData {
   TabData({required this.icon, required this.title, this.onclick});
 
   Widget icon;
-  String title;
-  Function? onclick;
   final UniqueKey key = UniqueKey();
+  Function? onclick;
+  String title;
 }
