@@ -28,10 +28,10 @@ class FancyBottomNavigation2 extends StatefulWidget {
   final TextStyle? titleStyle;
 
   @override
-  State<FancyBottomNavigation2> createState() => _FancyBottomNavigation2State();
+  State<FancyBottomNavigation2> createState() => FancyBottomNavigation2State();
 }
 
-class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
+class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
   Widget activeIcon = const Icon(Icons.home);
   Widget nextIcon = const Icon(Icons.home);
   //  Arc is used to create sonme outline
@@ -96,6 +96,16 @@ class _FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
           _circleIconAlpha = 1;
         });
       });
+    });
+  }
+
+  void setPage(int page) {
+    widget.onTabChangedListener(page);
+    _setSelected(widget.tabs[page].key);
+    _initAnimationAndStart(_circleAlignX, 1);
+
+    setState(() {
+      currentSelected = page;
     });
   }
 
