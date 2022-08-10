@@ -17,7 +17,7 @@ class FancyBottomNavigation2 extends StatefulWidget {
     this.circleColor,
     this.titleStyle,
     this.circleOutline = 10,
-  })  : assert(tabs.length > 1 && tabs.length < 5),
+  })  : assert(tabs.length > 1 && tabs.length < 6),
         super(key: key);
 
   final int animDuration;
