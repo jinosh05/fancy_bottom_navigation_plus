@@ -121,6 +121,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         //
         Container(
             height: widget.barheight,
+            width: double.maxFinite,
             decoration: BoxDecoration(
                 color: barBackgroundColor,
                 boxShadow: const [
@@ -154,6 +155,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         //
 
         Positioned.fill(
+          top: -20,
           child: AnimatedAlign(
             duration: Duration(milliseconds: widget.animDuration),
             curve: Curves.easeOut,

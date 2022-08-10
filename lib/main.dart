@@ -106,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomNavigationBar: FancyBottomNavigation2(
+        barheight: 200,
         titleStyle: const TextStyle(fontWeight: FontWeight.bold),
         tabs: [
           TabData(

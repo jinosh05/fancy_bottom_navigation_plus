@@ -28,8 +28,7 @@ class TabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return InkWell(
-      onTap: () => callbackFunction(uniqueKey),
+    return Expanded(
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -57,7 +56,8 @@ class TabItem extends StatelessWidget {
             child: AnimatedOpacity(
               opacity: selected ? 1 : 0,
               duration: Duration(milliseconds: animDuration),
-              child: icon,
+              child: InkWell(
+                  onTap: () => callbackFunction(uniqueKey), child: icon),
             ),
           )
         ],
