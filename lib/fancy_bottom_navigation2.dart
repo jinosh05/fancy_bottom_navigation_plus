@@ -155,7 +155,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         //
 
         Positioned.fill(
-          top: -20,
+          top: -10,
           child: AnimatedAlign(
             duration: Duration(milliseconds: widget.animDuration),
             curve: Curves.easeOut,

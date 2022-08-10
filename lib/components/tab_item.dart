@@ -54,7 +54,7 @@ class TabItem extends StatelessWidget {
             alignment: Alignment(0, (selected) ? iconOff : iconOn),
             duration: Duration(milliseconds: animDuration),
             child: AnimatedOpacity(
-              opacity: selected ? 1 : 0,
+              opacity: selected ? 0 : 1,
               duration: Duration(milliseconds: animDuration),
               child: InkWell(
                   onTap: () => callbackFunction(uniqueKey), child: icon),

@@ -106,11 +106,15 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomNavigationBar: FancyBottomNavigation2(
-        barheight: 200,
+        barheight: 60,
+        barBackgroundColor: Colors.yellow,
         titleStyle: const TextStyle(fontWeight: FontWeight.bold),
         tabs: [
           TabData(
-            icon: const Icon(Icons.home),
+            icon: const Icon(
+              Icons.home,
+              color: Colors.deepOrange,
+            ),
             title: "Home",
             onclick: () {
               final FancyBottomNavigation2State fState = bottomNavigationKey
