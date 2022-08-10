@@ -16,6 +16,7 @@ class FancyBottomNavigation2 extends StatefulWidget {
     this.shadowRadius = 10,
     this.circleColor,
     this.titleStyle,
+    this.circleOutline = 10,
   })  : assert(tabs.length > 1 && tabs.length < 5),
         super(key: key);
 
@@ -23,7 +24,7 @@ class FancyBottomNavigation2 extends StatefulWidget {
   final Color? barBackgroundColor, circleColor;
   final int initialSelection;
   final Function(int position) onTabChangedListener;
-  final double barheight, circleRadius, shadowRadius;
+  final double barheight, circleRadius, shadowRadius, circleOutline;
   final List<TabData> tabs;
   final TextStyle? titleStyle;
 
@@ -155,69 +156,78 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
         //
 
         Positioned.fill(
-          top: -10,
+          top: -(widget.circleRadius +
+                  widget.shadowRadius +
+                  widget.circleOutline) /
+              2,
           child: AnimatedAlign(
             duration: Duration(milliseconds: widget.animDuration),
             curve: Curves.easeOut,
             alignment: Alignment(_circleAlignX, 1),
-            child: FractionallySizedBox(
-              widthFactor: 1 / widget.tabs.length,
-              child: InkWell(
-                onTap: widget.tabs[currentSelected].onclick as void Function()?,
-                child: Stack(alignment: Alignment.center, children: [
-                  //
-                  //  Part of the Semicircle ARC with shadow
-                  //
-                  ClipRect(
-                    clipper: HalfClipper(),
-                    child: Container(
-                      width: widget.circleRadius + widget.shadowRadius,
-                      height: widget.circleRadius + widget.shadowRadius,
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: (widget.circleRadius / 2) - widget.shadowRadius,
+              ),
+              child: FractionallySizedBox(
+                widthFactor: 1 / widget.tabs.length,
+                child: GestureDetector(
+                  onTap:
+                      widget.tabs[currentSelected].onclick as void Function()?,
+                  child: Stack(alignment: Alignment.center, children: [
+                    //
+                    //  Part of the Semicircle ARC with shadow
+                    //
+                    ClipRect(
+                      clipper: HalfClipper(),
+                      child: Container(
+                        width: widget.circleRadius + widget.shadowRadius,
+                        height: widget.circleRadius + widget.shadowRadius,
+                        decoration: BoxDecoration(
+                          color: widget.barBackgroundColor,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: widget.shadowRadius * 0.75,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    //
+                    //  Custom Painting ARC to create Border
+                    //
+                    SizedBox(
+                      height: arcHeight,
+                      width: arcWidth,
+                      child: CustomPaint(
+                        painter: HalfPainter(
+                          barBackgroundColor,
+                          arcHeight,
+                          outline: widget.shadowRadius,
+                        ),
+                      ),
+                    ),
+
+                    //
+                    // Container to render the Icon
+                    //
+
+                    Container(
+                      width: widget.circleRadius,
+                      height: widget.circleRadius,
                       decoration: BoxDecoration(
-                        color: widget.barBackgroundColor,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: widget.shadowRadius * 0.75,
-                          )
-                        ],
+                          shape: BoxShape.circle, color: circleColor),
+                      child: AnimatedOpacity(
+                        opacity: _circleIconAlpha,
+                        duration:
+                            Duration(microseconds: widget.animDuration ~/ 5),
+                        child: activeIcon,
                       ),
-                    ),
-                  ),
-
-                  //
-                  //  Custom Painting ARC to create Border
-                  //
-                  SizedBox(
-                    height: arcHeight,
-                    width: arcWidth,
-                    child: CustomPaint(
-                      painter: HalfPainter(
-                        barBackgroundColor,
-                        arcHeight,
-                        outline: widget.shadowRadius,
-                      ),
-                    ),
-                  ),
-
-                  //
-                  // Container to render the Icon
-                  //
-
-                  Container(
-                    width: widget.circleRadius,
-                    height: widget.circleRadius,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: circleColor),
-                    child: AnimatedOpacity(
-                      opacity: _circleIconAlpha,
-                      duration:
-                          Duration(microseconds: widget.animDuration ~/ 5),
-                      child: activeIcon,
-                    ),
-                  )
-                ]),
+                    )
+                  ]),
+                ),
               ),
             ),
           ),
