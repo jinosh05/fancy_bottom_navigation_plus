@@ -1,3 +1,5 @@
+library fancy_bottom_navigation_2;
+
 import 'package:fancy_bottom_navigation_2/components/half_clipper.dart';
 import 'package:fancy_bottom_navigation_2/components/half_painter.dart';
 import 'package:fancy_bottom_navigation_2/components/tab_item.dart';
