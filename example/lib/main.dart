@@ -54,6 +54,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Fancy Bottom Navigation'),
+          backgroundColor: Colors.purple,
         ),
         body: _getpage(currentpage),
         bottomNavigationBar: FancyBottomNavigation2(
