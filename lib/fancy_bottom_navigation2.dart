@@ -114,6 +114,8 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
 
   @override
   Widget build(BuildContext context) {
+    TextDirection textDirection = Directionality.of(context);
+    bool isRtl = TextDirection.rtl == textDirection;
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
@@ -165,7 +167,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
           child: AnimatedAlign(
             duration: Duration(milliseconds: widget.animDuration),
             curve: Curves.easeOut,
-            alignment: Alignment(_circleAlignX, 1),
+            alignment: Alignment(isRtl ? -_circleAlignX : _circleAlignX, 1),
             child: Padding(
               padding: EdgeInsets.only(
                 bottom: (widget.circleRadius / 2) - widget.shadowRadius,

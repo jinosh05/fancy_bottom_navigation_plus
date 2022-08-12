@@ -51,25 +51,29 @@ class _MyAppState extends State<MyApp> {
           iconTheme: const IconThemeData(
             color: Colors.white,
           )),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Fancy Bottom Navigation'),
-        ),
-        body: _getpage(currentpage),
-        bottomNavigationBar: FancyBottomNavigation2(
-          barBackgroundColor: Colors.purple,
-          tabs: [
-            TabData(icon: const Icon(Icons.home), title: "Home"),
-            TabData(icon: const Icon(Icons.history), title: "History"),
-            TabData(icon: const Icon(Icons.search), title: "Search"),
-            TabData(icon: const Icon(Icons.phone), title: "Phone"),
-            TabData(icon: const Icon(Icons.settings), title: "Settings"),
-          ],
-          onTabChangedListener: (position) {
-            setState(() {
-              currentpage = position;
-            });
-          },
+      home: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Fancy Bottom Navigation'),
+            backgroundColor: Colors.purple,
+          ),
+          body: _getpage(currentpage),
+          bottomNavigationBar: FancyBottomNavigation2(
+            barBackgroundColor: Colors.purple,
+            tabs: [
+              TabData(icon: const Icon(Icons.home), title: "Home"),
+              TabData(icon: const Icon(Icons.history), title: "History"),
+              TabData(icon: const Icon(Icons.search), title: "Search"),
+              TabData(icon: const Icon(Icons.phone), title: "Phone"),
+              TabData(icon: const Icon(Icons.settings), title: "Settings"),
+            ],
+            onTabChangedListener: (position) {
+              setState(() {
+                currentpage = position;
+              });
+            },
+          ),
         ),
       ),
     );
