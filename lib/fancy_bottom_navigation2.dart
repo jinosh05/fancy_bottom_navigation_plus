@@ -1,8 +1,8 @@
-library fancy_bottom_navigation_2;
+library fancy_bottom_navigation_plus;
 
-import 'package:fancy_bottom_navigation_2/components/half_clipper.dart';
-import 'package:fancy_bottom_navigation_2/components/half_painter.dart';
-import 'package:fancy_bottom_navigation_2/components/tab_item.dart';
+import 'package:fancy_bottom_navigation_plus/components/half_clipper.dart';
+import 'package:fancy_bottom_navigation_plus/components/half_painter.dart';
+import 'package:fancy_bottom_navigation_plus/components/tab_item.dart';
 import 'package:flutter/material.dart';
 
 class FancyBottomNavigation2 extends StatefulWidget {
