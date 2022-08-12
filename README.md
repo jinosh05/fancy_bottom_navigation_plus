@@ -1,5 +1,6 @@
 # FancyBottomNavigationPlus
-![Fancy Gif](https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/fancy.gif)
+![Fancy Gif](https://github.com/jinosh05/fancy_bottom_navigation_plus/master/fancy.gif)
+![Fancy Gif](https://github.com/jinosh05/fancy_bottom_navigation/blob/master/fancy_gif.gif "Fancy Gif")
 
 ## Getting Started
 
