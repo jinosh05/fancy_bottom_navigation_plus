@@ -1,16 +1,85 @@
-# fancy_bottom_navigation_plus
-
-A new Flutter project.
+# FancyBottomNavigationPlus
+![Fancy Gif]("https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/fancy.gif")
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Add the plugin (pub coming soon):
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```yaml
+dependencies:
+  ...
+  fancy_bottom_navigation_plus: ^0.0.1
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Limitations
+For now this is limited to more than 1 tab, and less than 6. So 2-5 tabs.
+
+## Basic Usage
+
+Adding the widget
+```dart
+bottomNavigationBar: FancyBottomNavigation(
+    tabs: [
+            TabData(icon: const Icon(Icons.home), title: "Home"),
+            TabData(icon: const Icon(Icons.history), title: "History"),
+            TabData(icon: const Icon(Icons.search), title: "Search"),
+            TabData(icon: const Icon(Icons.phone), title: "Phone"),
+            TabData(icon: const Icon(Icons.settings), title: "Settings"),
+    ],
+    onTabChangedListener: (position) {
+        setState(() {
+        currentPage = position;
+        });
+    },
+)
+```
+
+## TabData
+**icon** -> Widget to be used for the tab<br/>
+**title** -> String to be used for the tab<br/>
+**onClick** -> Optional function to be used when the circle itself is clicked, on an active tab
+
+
+### optional
+**initialSelection** -> Defaults to 0<br/>
+**circleColor** -> Defaults to null, derives from `Theme`<br/>
+**textColor** -> Defaults to null, derives from `Theme`<br/>
+**barBackgroundColor** -> Defaults to null, derives from `Theme`<br/>
+**barheight** -> Default to 60<br/>
+**circleRadius** -> Default to 60<br/>
+**shadowRadius** -> Default to 10<br/>
+**circleOutline** -> Default to 10<br/>
+**titleStyle** -> Default value already given<br/>
+**key** -> Defaults to null<br/>
+
+
+## Theming
+
+The bar will attempt to use your current theme out of the box, however you may want to theme it.
+
+
+## Showcase
+Using this package in a live app, let me know and I'll add you app here.
+
+
+## Inspiration
+
+This package was inspired by a previous version 
+- fancy_bottom_navigation(https://pub.dev/packages/fancy_bottom_navigation)
+
+## Raise issues 
+Kindly try the package and let me know for improvement and bug fixes.
+
+
+## Contributing
+
+Contributions are welcome, please submit a PR :)
+
+
+
+
+
+
+
