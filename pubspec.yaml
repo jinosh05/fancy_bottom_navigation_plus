@@ -1,7 +1,7 @@
-name: fancy_bottom_navigation_2
+name: fancy_bottom_navigation_plus
 description: An animated Bottom Navigation Bar for Flutter apps, icon animates into place, colors are customisable..
 version: 0.0.1
-homepage: https://github.com/jinosh05/fancy_bottom_navigation_2
+homepage: https://github.com/jinosh05/fancy_bottom_navigation_plus
 
 environment:
   sdk: ">=2.17.3 <3.0.0"

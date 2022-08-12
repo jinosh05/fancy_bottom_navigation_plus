@@ -1,4 +1,4 @@
-import 'package:fancy_bottom_navigation_2/fancy_bottom_navigation2.dart';
+import 'package:fancy_bottom_navigation_plus/fancy_bottom_navigation2.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());

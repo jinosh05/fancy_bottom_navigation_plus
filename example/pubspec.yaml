@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  fancy_bottom_navigation_2:
+  fancy_bottom_navigation_plus:
     path: ../
 
 dev_dependencies:
