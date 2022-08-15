@@ -1,9 +1,10 @@
 library fancy_bottom_navigation_plus;
 
-import 'package:fancy_bottom_navigation_plus/components/half_clipper.dart';
 import 'package:fancy_bottom_navigation_plus/components/half_painter.dart';
 import 'package:fancy_bottom_navigation_plus/components/tab_item.dart';
 import 'package:flutter/material.dart';
+
+import 'components/half_clipper.dart';
 
 class FancyBottomNavigation2 extends StatefulWidget {
   const FancyBottomNavigation2({
@@ -170,7 +171,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
             alignment: Alignment(isRtl ? -_circleAlignX : _circleAlignX, 1),
             child: Padding(
               padding: EdgeInsets.only(
-                bottom: (widget.circleRadius / 2) - widget.shadowRadius,
+                bottom: (widget.circleRadius - widget.circleOutline) / 2,
               ),
               child: FractionallySizedBox(
                 widthFactor: 1 / widget.tabs.length,
