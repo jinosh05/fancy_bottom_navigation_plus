@@ -1,13 +1,13 @@
 library fancy_bottom_navigation_plus;
 
-import 'package:fancy_bottom_navigation_plus/components/half_painter.dart';
 import 'package:fancy_bottom_navigation_plus/components/tab_item.dart';
 import 'package:flutter/material.dart';
 
 import 'components/half_clipper.dart';
+import 'components/half_painter.dart';
 
-class FancyBottomNavigation2 extends StatefulWidget {
-  const FancyBottomNavigation2({
+class FancyBottomNavigationPlus extends StatefulWidget {
+  const FancyBottomNavigationPlus({
     Key? key,
     this.barheight = 60,
     required this.tabs,
@@ -32,10 +32,11 @@ class FancyBottomNavigation2 extends StatefulWidget {
   final TextStyle? titleStyle;
 
   @override
-  State<FancyBottomNavigation2> createState() => FancyBottomNavigation2State();
+  State<FancyBottomNavigationPlus> createState() =>
+      FancyBottomNavigationPlusState();
 }
 
-class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
+class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
   Widget activeIcon = const Icon(Icons.home);
   Widget nextIcon = const Icon(Icons.home);
   //  Arc is used to create sonme outline
@@ -171,7 +172,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
             alignment: Alignment(isRtl ? -_circleAlignX : _circleAlignX, 1),
             child: Padding(
               padding: EdgeInsets.only(
-                bottom: (widget.circleRadius - widget.circleOutline) / 2,
+                bottom: widget.barheight / 2,
               ),
               child: FractionallySizedBox(
                 widthFactor: 1 / widget.tabs.length,
@@ -193,7 +194,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
-                              blurRadius: widget.shadowRadius * 1.75,
+                              blurRadius: widget.shadowRadius * 0.75,
                             )
                           ],
                         ),
@@ -204,7 +205,7 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                     //  Custom Painting ARC to create Border
                     //
                     SizedBox(
-                      height: arcHeight,
+                      height: arcHeight - widget.shadowRadius,
                       width: arcWidth,
                       child: CustomPaint(
                         painter: HalfPainter(

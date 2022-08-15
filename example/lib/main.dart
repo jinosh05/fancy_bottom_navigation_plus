@@ -1,4 +1,4 @@
-import 'package:fancy_bottom_navigation_plus/fancy_bottom_navigation2.dart';
+import 'package:fancy_bottom_navigation_plus/fancy_bottom_navigation_plus.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.purple,
         ),
         body: _getpage(currentpage),
-        bottomNavigationBar: FancyBottomNavigation2(
+        bottomNavigationBar: FancyBottomNavigationPlus(
           barBackgroundColor: Colors.purple,
           tabs: [
             TabData(icon: const Icon(Icons.home), title: "Home"),

@@ -18,7 +18,7 @@ class HalfPainter extends CustomPainter {
       outline,
       0,
       size.width - outline * 2,
-      height ?? 60,
+      height ?? 40,
     );
     final Rect afterRect = Rect.fromLTWH(
         size.width - outline, (size.height / 2) - outline, outline, outline);
