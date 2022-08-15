@@ -5,3 +5,8 @@ Created Package with major required Properties
 Version 0.1.0 
 
 Improved Arc UI
+
+
+Version 0.1.1
+
+Preview GIF updated
