@@ -185,15 +185,15 @@ class FancyBottomNavigation2State extends State<FancyBottomNavigation2> {
                     ClipRect(
                       clipper: HalfClipper(),
                       child: Container(
-                        width: widget.circleRadius + widget.shadowRadius,
-                        height: widget.circleRadius + widget.shadowRadius,
+                        width: widget.circleRadius - widget.shadowRadius,
+                        height: widget.circleRadius - widget.shadowRadius,
                         decoration: BoxDecoration(
                           color: widget.barBackgroundColor,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
-                              blurRadius: widget.shadowRadius * 0.75,
+                              blurRadius: widget.shadowRadius * 1.75,
                             )
                           ],
                         ),
