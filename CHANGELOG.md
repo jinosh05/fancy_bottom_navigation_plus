@@ -10,3 +10,7 @@ Improved Arc UI
 Version 0.1.1
 
 Preview GIF updated
+
+Version 1.0.0
+
+Stable version
