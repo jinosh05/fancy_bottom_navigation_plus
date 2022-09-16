@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'components/half_clipper.dart';
 import 'components/half_painter.dart';
 
+///
+/// [FancyBottomNavigationPlus] is an animated bottom Navigation Bar
+/// developed in Flutter with simple Animated widgets.
+/// User can currently use only 5 tabs and Pull requests are welcome regarding upgrades.
+///
 class FancyBottomNavigationPlus extends StatefulWidget {
   const FancyBottomNavigationPlus({
     Key? key,
