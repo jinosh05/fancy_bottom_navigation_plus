@@ -11,7 +11,7 @@ Add the plugin (pub coming soon):
 ```yaml
 dependencies:
   ...
-  fancy_bottom_navigation_plus: ^0.0.1
+  fancy_bottom_navigation_plus: ^1.0.1
 ```
 
 
