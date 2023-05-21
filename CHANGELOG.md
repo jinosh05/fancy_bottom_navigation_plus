@@ -18,3 +18,7 @@ Stable version
 Version 1.0.1
 
 Dart 3.0 updated
+
+Version 1.0.2
+
+Added mount check condition
