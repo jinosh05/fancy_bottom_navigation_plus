@@ -96,15 +96,19 @@ class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
     _circleIconAlpha = 0;
 
     Future.delayed(Duration(milliseconds: widget.animDuration ~/ 5), () {
-      setState(() {
-        activeIcon = nextIcon;
-      });
+      if (mounted) {
+        setState(() {
+          activeIcon = nextIcon;
+        });
+      }
     }).then((_) {
       Future.delayed(Duration(milliseconds: (widget.animDuration ~/ 5 * 3)),
           () {
-        setState(() {
-          _circleIconAlpha = 1;
-        });
+        if (mounted) {
+          setState(() {
+            _circleIconAlpha = 1;
+          });
+        }
       });
     });
   }
@@ -114,9 +118,11 @@ class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
     _setSelected(widget.tabs[page].key);
     _initAnimationAndStart(_circleAlignX, 1);
 
-    setState(() {
-      currentSelected = page;
-    });
+    if (mounted) {
+      setState(() {
+        currentSelected = page;
+      });
+    }
   }
 
   @override
