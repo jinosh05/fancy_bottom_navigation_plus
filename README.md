@@ -38,7 +38,7 @@ For now this is limited to more than 1 tab, and less than 6. So 2-5 tabs.
 
 Adding the widget
 ```dart
-bottomNavigationBar: FancyBottomNavigation(
+bottomNavigationBar: FancyBottomNavigationPlus(
     tabs: [
             TabData(icon: const Icon(Icons.home), title: "Home"),
             TabData(icon: const Icon(Icons.history), title: "History"),
