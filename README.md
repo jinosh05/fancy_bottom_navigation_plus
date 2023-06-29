@@ -1,4 +1,20 @@
 # FancyBottomNavigationPlus
+
+
+[![Pub](https://img.shields.io/pub/v/fancy_bottom_navigation_plus.svg)](https://pub.dartlang.org/packages/fancy_bottom_navigation_plus) 
+[![License](https://img.shields.io/badge/licence-MIT-orange.svg)](https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/LICENSE)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jinosh05/fancy_bottom_navigation_plus.svg)](https://github.com/jinosh05/fancy_bottom_navigation_plus)
+[![GitHub stars](https://img.shields.io/github/stars/jinosh05/fancy_bottom_navigation_plus.svg?style=social)](https://github.com/jinosh05/fancy_bottom_navigation_plus)
+
+
+<p align="center" >
+  <br />
+  <br />
+<a href="https://www.buymeacoffee.com/jinosh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+</p>
+
+<br />
+
 ![Fancy Gif](https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/fancy.gif "Fancy Gif")
 
 
@@ -11,7 +27,7 @@ Add the plugin (pub coming soon):
 ```yaml
 dependencies:
   ...
-  fancy_bottom_navigation_plus: ^1.0.1
+  fancy_bottom_navigation_plus: ^1.0.3
 ```
 
 

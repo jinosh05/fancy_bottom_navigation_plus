@@ -22,3 +22,7 @@ Dart 3.0 updated
 Version 1.0.2
 
 Added mount check condition
+
+Version 1.0.3
+
+Added Dart 2.12 Support
