@@ -4,7 +4,7 @@ version: 1.0.4
 homepage: https://github.com/jinosh05/fancy_bottom_navigation_plus
 
 environment:
-  sdk: ^2.12.0
+  sdk: '>=2.12.0 <4.0.0'
 
 dependencies:
   flutter:
