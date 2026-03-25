@@ -1,103 +1,166 @@
-# FancyBottomNavigationPlus
+# Fancy Bottom Navigation Plus
 
-
-[![Pub](https://img.shields.io/pub/v/fancy_bottom_navigation_plus.svg)](https://pub.dartlang.org/packages/fancy_bottom_navigation_plus) 
-[![License](https://img.shields.io/badge/licence-MIT-orange.svg)](https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/LICENSE)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jinosh05/fancy_bottom_navigation_plus.svg)](https://github.com/jinosh05/fancy_bottom_navigation_plus)
+[![Pub](https://img.shields.io/pub/v/fancy_bottom_navigation_plus.svg?logo=dart&logoColor=white)](https://pub.dev/packages/fancy_bottom_navigation_plus)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/jinosh05/fancy_bottom_navigation_plus.svg?style=social)](https://github.com/jinosh05/fancy_bottom_navigation_plus)
+[![Donate](https://img.shields.io/badge/Donate-Razorpay-blue?style=for-the-badge&logoColor=white&logo=razorpay)](https://razorpay.me/@devasundarjinosh)
 
+A highly customizable, smooth, and animated bottom navigation bar for Flutter. The icon animates elegantly into place when selected, providing a premium feel to your application UI.
 
-<p align="center" >
-  <br />
-  <br />
-<a href="https://www.buymeacoffee.com/jinosh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-</p>
+---
 
-<br />
+## 🚀 Key Features
 
-![Fancy Gif](https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/fancy.gif "Fancy Gif")
+- **Smooth Animation**: Iconic "bubble-up" animation for active tabs.
+- **Highly Customizable**: Change colors, sizes, and styles to match your brand.
+- **Easy Theming**: Inherits from your app's `ThemeData` automatically.
+- **Lightweight**: Minimal dependencies, focus on performance.
+- **Responsive**: Adapts perfectly to different screen sizes.
 
+---
 
+## 📸 Preview
 
-## Getting Started
+![Fancy Animation](https://github.com/jinosh05/fancy_bottom_navigation_plus/blob/master/fancy.gif)
 
+---
 
-Add the plugin (pub coming soon):
+## 📦 Installation
+
+Add the dependency to your `pubspec.yaml`:
+
+```bash
+flutter pub add fancy_bottom_navigation_plus
+```
+
+Or manually:
 
 ```yaml
 dependencies:
-  ...
   fancy_bottom_navigation_plus: ^1.0.3
 ```
 
+---
 
-## Limitations
-For now this is limited to more than 1 tab, and less than 6. So 2-5 tabs.
+## 🛠️ Basic Usage
 
-## Basic Usage
-
-Adding the widget
 ```dart
+import 'package:fancy_bottom_navigation_plus/fancy_bottom_navigation_plus.dart';
+
+// ... inside your Scaffold
 bottomNavigationBar: FancyBottomNavigationPlus(
     tabs: [
-            TabData(icon: const Icon(Icons.home), title: "Home"),
-            TabData(icon: const Icon(Icons.history), title: "History"),
-            TabData(icon: const Icon(Icons.search), title: "Search"),
-            TabData(icon: const Icon(Icons.phone), title: "Phone"),
-            TabData(icon: const Icon(Icons.settings), title: "Settings"),
+        TabData(icon: Icon(Icons.home), title: "Home"),
+        TabData(icon: Icon(Icons.history), title: "History"),
+        TabData(icon: Icon(Icons.search), title: "Search"),
+        TabData(icon: Icon(Icons.settings), title: "Settings"),
     ],
     onTabChangedListener: (position) {
         setState(() {
-        currentPage = position;
+            currentPage = position;
         });
     },
 )
 ```
 
-## TabData
-**icon** -> Widget to be used for the tab<br/>
-**title** -> String to be used for the tab<br/>
-**onClick** -> Optional function to be used when the circle itself is clicked, on an active tab
+---
 
+## ⚙️ Properties & Customization
 
-### optional
-**initialSelection** -> Defaults to 0<br/>
-**circleColor** -> Defaults to null, derives from `Theme`<br/>
-**textColor** -> Defaults to null, derives from `Theme`<br/>
-**barBackgroundColor** -> Defaults to null, derives from `Theme`<br/>
-**barheight** -> Default to 60<br/>
-**circleRadius** -> Default to 60<br/>
-**shadowRadius** -> Default to 10<br/>
-**circleOutline** -> Default to 10<br/>
-**titleStyle** -> Default value already given<br/>
-**key** -> Defaults to null<br/>
+### FancyBottomNavigationPlus
 
+| Property | Description | Default |
+| :--- | :--- | :--- |
+| `tabs` | List of `TabData` objects (Required) | - |
+| `onTabChangedListener` | Callback function when active tab changes (Required) | - |
+| `initialSelection` | The index of the initially selected tab | `0` |
+| `circleColor` | Color of the floating circle | `Theme.primaryColor` |
+| `activeIconColor` | Color of the icon when active | `Theme.canvasColor` |
+| `inactiveIconColor` | Color of the icon when inactive | `Theme.primaryColor` |
+| `textColor` | Color of the tab title text | `Theme.primaryColor` |
+| `barBackgroundColor` | Background color of the navigation bar | `Theme.canvasColor` |
+| `barHeight` | Total height of the navigation bar | `60.0` |
+| `circleRadius` | Radius of the animated circle | `60.0` |
+| `shadowRadius` | Radius of the shadow behind the bar | `10.0` |
+| `circleOutline` | Width of the circle's outline | `10.0` |
+| `titleStyle` | `TextStyle` for the tab titles | - |
 
-## Theming
+### TabData
 
-The bar will attempt to use your current theme out of the box, however you may want to theme it.
+| Property | Description |
+| :--- | :--- |
+| `icon` | The icon `Widget` to display (Required) |
+| `title` | The label `String` for the tab (Required) |
+| `onClick` | Optional callback when the *active* tab circle is clicked |
 
+---
 
-## Showcase
-Using this package in a live app, let me know and I'll add you app here.
+## 🎨 Theming
 
+The bar attempts to use your current `ThemeData` out of the box. You can override specific colors globally using your theme or locally via the widget's properties.
 
-## Inspiration
+```dart
+ThemeData(
+  primaryColor: Colors.deepPurple,
+  canvasColor: Colors.white,
+)
+```
 
-This package was inspired by a previous version 
-- fancy_bottom_navigation(https://pub.dev/packages/fancy_bottom_navigation)
+---
 
-## Raise issues 
-Kindly try the package and let me know for improvement and bug fixes.
+## ☕ Support the Project
 
+If you find this package helpful, consider supporting the development!
 
-## Contributing
+<p align="left">
+<a href="https://razorpay.me/@devasundarjinosh" target="_blank">
+  <img src="https://img.shields.io/badge/Donate-Razorpay-blue?style=for-the-badge&logo=razorpay" alt="Donate with Razorpay">
+</a>
+<a href="https://www.buymeacoffee.com/jinosh" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="40">
+</a>
+</p>
 
-Contributions are welcome, please submit a PR :)
+---
 
+## 💡 Inspiration
 
+This package is an enhanced version of the original [fancy_bottom_navigation](https://pub.dev/packages/fancy_bottom_navigation).
 
+## 🐛 Issues & Contributing
 
+Found a bug or have a feature request? Please [raise an issue](https://github.com/jinosh05/fancy_bottom_navigation_plus/issues).
+Contributions are welcome! If you'd like to help improve the package, please follow the steps below.
 
+---
 
+## 🤝 How to Contribute
 
+1. **Fork** the repository:
+   Click the **Fork** button at the top right of the [GitHub page](https://github.com/jinosh05/fancy_bottom_navigation_plus).
+
+2. **Clone** your fork:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/fancy_bottom_navigation_plus.git
+   ```
+
+3. **Create a new branch**:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+4. **Make your changes**:
+   Ensure your code is well-documented (using DartDoc) and follows the project's style.
+
+5. **Commit your changes**:
+   ```bash
+   git commit -m "Add some feature"
+   ```
+
+6. **Push to your fork**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+7. **Submit a Pull Request**:
+   Go to the original repository and click **New Pull Request**. Describe your changes clearly!

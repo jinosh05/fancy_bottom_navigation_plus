@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// Position of the icon when it is not selected.
 const double iconOff = -3;
+
+/// Position of the icon when it is selected.
 const double iconOn = 0;
+
+/// Position of the text when it is not selected.
 const double textOff = 3;
+
+/// Position of the text when it is selected.
 const double textOn = 1;
 
+/// [TabItem] is an internal widget used to render an individual tab
+/// within the [FancyBottomNavigationPlus] bar.
 class TabItem extends StatelessWidget {
+  /// Creates a [TabItem].
   const TabItem({
     Key? key,
     this.animDuration = 300,
@@ -17,12 +27,25 @@ class TabItem extends StatelessWidget {
     required this.callbackFunction,
   }) : super(key: key);
 
+  /// The duration of the transition animations.
   final int animDuration;
+
+  /// Whether this tab is currently selected.
   final bool selected;
+
+  /// The unique key associated with this tab.
   final UniqueKey uniqueKey;
+
+  /// The text label to display.
   final String title;
+
+  /// The icon widget to display.
   final Widget icon;
+
+  /// Custom text style for the label.
   final TextStyle? titleStyle;
+
+  /// Callback function triggered when this tab is tapped.
   final Function(UniqueKey uniqueKey) callbackFunction;
 
   @override

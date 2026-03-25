@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math.dart';
 
+/// [HalfPainter] is a [CustomPainter] that draws a unique "arc" border for the
+/// floating circle in [FancyBottomNavigationPlus].
 class HalfPainter extends CustomPainter {
+  /// Creates a [HalfPainter].
+  ///
+  /// [paintColor] defines the color of the arc.
+  /// [height] defines the height of the arc portion.
+  /// [outline] defines the thickness of the border/outline.
   HalfPainter(Color paintColor, this.height, {this.outline = 10}) {
     arcPaint = Paint()..color = paintColor;
   }
 
+  /// The [Paint] object used to draw the arc.
   late Paint arcPaint;
+
+  /// The height of the arc.
   final double? height;
+
+  /// The width of the outline border.
   final double outline;
 
   @override

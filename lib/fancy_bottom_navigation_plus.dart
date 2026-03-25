@@ -6,12 +6,17 @@ import 'package:flutter/material.dart';
 import 'components/half_clipper.dart';
 import 'components/half_painter.dart';
 
+/// [FancyBottomNavigationPlus] is a highly customizable, animated bottom navigation bar
+/// developed in Flutter. It features a floating circle animation that moves
+/// smoothly when tabs are switched, providing a premium feel to your application.
 ///
-/// [FancyBottomNavigationPlus] is an animated bottom Navigation Bar
-/// developed in Flutter with simple Animated widgets.
-/// User can currently use only 5 tabs and Pull requests are welcome regarding upgrades.
-///
+/// The widget typically resides in the `bottomNavigationBar` property of a [Scaffold].
+/// It supports between 2 and 5 tabs defined using [TabData] objects.
 class FancyBottomNavigationPlus extends StatefulWidget {
+  /// Creates a [FancyBottomNavigationPlus] widget.
+  ///
+  /// The [tabs] and [onTabChangedListener] arguments must not be null.
+  /// The [tabs] list must have a length between 2 and 5 (inclusive).
   const FancyBottomNavigationPlus({
     Key? key,
     this.barheight = 60,
@@ -28,12 +33,47 @@ class FancyBottomNavigationPlus extends StatefulWidget {
   })  : assert(tabs.length > 1 && tabs.length < 6),
         super(key: key);
 
+  /// The duration of the slide and fade animations in milliseconds.
+  /// Defaults to 300.
   final int animDuration;
-  final Color? barBackgroundColor, circleColor;
+
+  /// The background color of the navigation bar.
+  /// If null, it defaults to the [Theme]'s canvas color or black54/white based on brightness.
+  final Color? barBackgroundColor;
+
+  /// The color of the animated floating circle.
+  /// If null, it defaults to the [Theme]'s primary color.
+  final Color? circleColor;
+
+  /// The index of the initially selected tab.
+  /// Defaults to 0.
   final int initialSelection;
+
+  /// Callback function that is triggered when the user taps on a tab.
+  /// Receives the [position] (index) of the newly selected tab.
   final Function(int position) onTabChangedListener;
-  final double barheight, circleRadius, shadowRadius, circleOutline;
+
+  /// The height of the bottom navigation bar.
+  /// Defaults to 60.0.
+  final double barheight;
+
+  /// The radius of the floating circle.
+  /// Defaults to 60.0.
+  final double circleRadius;
+
+  /// The radius of the shadow applied to the navigation bar.
+  /// Defaults to 10.0.
+  final double shadowRadius;
+
+  /// The width of the circle's outline border.
+  /// Defaults to 10.0.
+  final double circleOutline;
+
+  /// The list of tabs to display.
+  /// Must contain between 2 and 5 [TabData] objects.
   final List<TabData> tabs;
+
+  /// Custom [TextStyle] for the tab labels.
   final TextStyle? titleStyle;
 
   @override
@@ -254,11 +294,22 @@ class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
   }
 }
 
+/// [TabData] is a model used to define a single tab in [FancyBottomNavigationPlus].
 class TabData {
+  /// Creates a [TabData] object.
+  ///
+  /// The [icon] and [title] arguments must not be null.
   TabData({required this.icon, required this.title, this.onclick});
 
+  /// The widget used as the icon for this tab.
   Widget icon;
+
+  /// A unique key generated for this tab to track selection.
   final UniqueKey key = UniqueKey();
+
+  /// An optional callback function that is triggered when the active tab circle is clicked.
   Function? onclick;
+
+  /// The text label for this tab.
   String title;
 }
