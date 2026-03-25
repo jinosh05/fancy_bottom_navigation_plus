@@ -92,6 +92,8 @@ bottomNavigationBar: FancyBottomNavigationPlus(
 | `icon` | The icon `Widget` to display (Required) |
 | `title` | The label `String` for the tab (Required) |
 | `onClick` | Optional callback when the *active* tab circle is clicked |
+| `activeIconColor` | Optional color for the icon when the tab is active |
+| `inactiveIconColor` | Optional color for the icon when the tab is inactive |
 
 ---
 

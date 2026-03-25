@@ -3,6 +3,7 @@ library fancy_bottom_navigation_plus;
 import 'package:fancy_bottom_navigation_plus/components/tab_item.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter/services.dart';
 import 'components/half_clipper.dart';
 import 'components/half_painter.dart';
 
@@ -158,6 +159,8 @@ class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
     _setSelected(widget.tabs[page].key);
     _initAnimationAndStart(_circleAlignX, 1);
 
+    HapticFeedback.selectionClick();
+
     if (mounted) {
       setState(() {
         currentSelected = page;
@@ -177,36 +180,41 @@ class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
         // Using this container to create the
         //  background and text contemts
         //
-        Container(
-            height: widget.barheight,
-            width: double.maxFinite,
-            decoration: BoxDecoration(
-                color: barBackgroundColor,
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0, -1),
-                      blurRadius: 8)
-                ]),
-            child: Row(
-              children: widget.tabs
-                  .map((t) => TabItem(
-                        selected: t.key == widget.tabs[currentSelected].key,
-                        title: t.title,
-                        uniqueKey: t.key,
-                        icon: t.icon,
-                        animDuration: widget.animDuration,
-                        titleStyle: widget.titleStyle,
-                        callbackFunction: (uniqueKey) {
-                          int selected = widget.tabs.indexWhere(
-                              (tabData) => tabData.key == uniqueKey);
-                          widget.onTabChangedListener(selected);
-                          _setSelected(uniqueKey);
-                          _initAnimationAndStart(_circleAlignX, 1);
-                        },
-                      ))
-                  .toList(),
-            )),
+        RepaintBoundary(
+          child: Container(
+              height: widget.barheight,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  color: barBackgroundColor,
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0, -1),
+                        blurRadius: 8)
+                  ]),
+              child: Row(
+                children: widget.tabs
+                    .map((t) => TabItem(
+                          selected: t.key == widget.tabs[currentSelected].key,
+                          title: t.title,
+                          uniqueKey: t.key,
+                          icon: t.icon,
+                          animDuration: widget.animDuration,
+                          titleStyle: widget.titleStyle,
+                          activeIconColor: t.activeIconColor,
+                          inactiveIconColor: t.inactiveIconColor,
+                          callbackFunction: (uniqueKey) {
+                            int selected = widget.tabs.indexWhere(
+                                (tabData) => tabData.key == uniqueKey);
+                            widget.onTabChangedListener(selected);
+                            _setSelected(uniqueKey);
+                            _initAnimationAndStart(_circleAlignX, 1);
+                            HapticFeedback.selectionClick();
+                          },
+                        ))
+                    .toList(),
+              )),
+        ),
 
         //
         // Using this to create Icon Portion
@@ -242,10 +250,10 @@ class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
                         decoration: BoxDecoration(
                           color: widget.barBackgroundColor,
                           shape: BoxShape.circle,
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Colors.black12,
-                              blurRadius: widget.shadowRadius * 0.75,
+                              blurRadius: 10 * 0.75, // Simplified to const
                             )
                           ],
                         ),
@@ -258,11 +266,13 @@ class FancyBottomNavigationPlusState extends State<FancyBottomNavigationPlus> {
                     SizedBox(
                       height: arcHeight - widget.shadowRadius,
                       width: arcWidth,
-                      child: CustomPaint(
-                        painter: HalfPainter(
-                          barBackgroundColor,
-                          arcHeight,
-                          outline: widget.shadowRadius,
+                      child: RepaintBoundary(
+                        child: CustomPaint(
+                          painter: HalfPainter(
+                            barBackgroundColor,
+                            arcHeight,
+                            outline: widget.shadowRadius,
+                          ),
                         ),
                       ),
                     ),
@@ -299,7 +309,13 @@ class TabData {
   /// Creates a [TabData] object.
   ///
   /// The [icon] and [title] arguments must not be null.
-  TabData({required this.icon, required this.title, this.onclick});
+  TabData({
+    required this.icon,
+    required this.title,
+    this.onclick,
+    this.activeIconColor,
+    this.inactiveIconColor,
+  });
 
   /// The widget used as the icon for this tab.
   Widget icon;
@@ -312,4 +328,10 @@ class TabData {
 
   /// The text label for this tab.
   String title;
+
+  /// Optional color for the icon when the tab is active.
+  final Color? activeIconColor;
+
+  /// Optional color for the icon when the tab is inactive.
+  final Color? inactiveIconColor;
 }

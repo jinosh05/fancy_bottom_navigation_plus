@@ -11,6 +11,6 @@ class HalfClipper extends CustomClipper<Rect> {
 
   @override
   bool shouldReclip(CustomClipper<Rect> oldClipper) {
-    return true;
+    return false;
   }
 }

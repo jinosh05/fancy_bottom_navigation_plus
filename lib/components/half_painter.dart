@@ -9,9 +9,12 @@ class HalfPainter extends CustomPainter {
   /// [paintColor] defines the color of the arc.
   /// [height] defines the height of the arc portion.
   /// [outline] defines the thickness of the border/outline.
-  HalfPainter(Color paintColor, this.height, {this.outline = 10}) {
+  HalfPainter(this.paintColor, this.height, {this.outline = 10}) {
     arcPaint = Paint()..color = paintColor;
   }
+
+  /// The color used to paint the arc.
+  final Color paintColor;
 
   /// The [Paint] object used to draw the arc.
   late Paint arcPaint;
@@ -48,7 +51,9 @@ class HalfPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
+  bool shouldRepaint(HalfPainter oldDelegate) {
+    return oldDelegate.paintColor != paintColor ||
+        oldDelegate.height != height ||
+        oldDelegate.outline != outline;
   }
 }

@@ -25,6 +25,8 @@ class TabItem extends StatelessWidget {
     required this.icon,
     this.titleStyle,
     required this.callbackFunction,
+    this.activeIconColor,
+    this.inactiveIconColor,
   }) : super(key: key);
 
   /// The duration of the transition animations.
@@ -48,6 +50,12 @@ class TabItem extends StatelessWidget {
   /// Callback function triggered when this tab is tapped.
   final Function(UniqueKey uniqueKey) callbackFunction;
 
+  /// Optional color for the icon when the tab is active.
+  final Color? activeIconColor;
+
+  /// Optional color for the icon when the tab is inactive.
+  final Color? inactiveIconColor;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -60,6 +68,7 @@ class TabItem extends StatelessWidget {
             child: AnimatedAlign(
               alignment: Alignment(0, selected ? textOn : textOff),
               duration: Duration(milliseconds: animDuration),
+              curve: Curves.easeInOut,
               child: Padding(
                 padding: EdgeInsets.all(height * 0.015),
                 child: Text(
@@ -76,11 +85,21 @@ class TabItem extends StatelessWidget {
           AnimatedAlign(
             alignment: Alignment(0, (selected) ? iconOff : iconOn),
             duration: Duration(milliseconds: animDuration),
+            curve: Curves.easeInOut,
             child: AnimatedOpacity(
               opacity: selected ? 0 : 1,
               duration: Duration(milliseconds: animDuration),
               child: InkWell(
-                  onTap: () => callbackFunction(uniqueKey), child: icon),
+                onTap: () => callbackFunction(uniqueKey),
+                child: IconTheme(
+                  data: IconThemeData(
+                    color: selected
+                        ? (activeIconColor ?? Colors.white)
+                        : (inactiveIconColor ?? Colors.white),
+                  ),
+                  child: icon,
+                ),
+              ),
             ),
           )
         ],
