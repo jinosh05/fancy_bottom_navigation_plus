@@ -45,7 +45,7 @@ class TabItem extends StatelessWidget {
                   maxLines: 1,
                   style: titleStyle ??
                       const TextStyle(
-                          fontWeight: FontWeight.w600, color: Colors.black),
+                          fontWeight: FontWeight.w600, color: Colors.white),
                 ),
               ),
             ),
